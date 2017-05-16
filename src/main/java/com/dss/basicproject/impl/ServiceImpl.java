@@ -58,12 +58,14 @@ public class ServiceImpl implements Service {
 
 	@Override
 	public ItemSizeEntity findByItemSizeId(Integer itemSizeId) {
+		System.out.println("Hello");
 		// TODO Auto-generated method stub
 		return itemSizeRepository.findOne(itemSizeId);
 	}
 
 	@Override
 	public void saveItem(ItemEntity itemEntity) {
+		System.out.println("Item Save");
 itemRepository.save(itemEntity);
 	}
 
