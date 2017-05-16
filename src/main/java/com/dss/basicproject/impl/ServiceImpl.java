@@ -65,6 +65,7 @@ public class ServiceImpl implements Service {
 
 	@Override
 	public void saveItem(ItemEntity itemEntity) {
+		System.out.println("Item Save");
 itemRepository.save(itemEntity);
 	}
 
