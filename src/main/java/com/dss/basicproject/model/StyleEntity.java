@@ -39,7 +39,7 @@ public class StyleEntity {
 	@JoinColumn(name = "country_id")
 	private CountryEntity country;
 
-	@OneToMany(mappedBy = "style", cascade = CascadeType.REMOVE,fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "style", cascade = CascadeType.ALL,fetch=FetchType.EAGER)
 	private Set<ItemEntity> items;
 
 	@ManyToOne
