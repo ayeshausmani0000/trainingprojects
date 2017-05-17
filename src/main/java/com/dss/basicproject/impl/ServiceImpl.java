@@ -79,4 +79,11 @@ itemRepository.save(itemEntity);
 		// TODO Auto-generated method stub
 		return itemRepository.findOne(itemId);
 	}
+
+	@Override
+	public void remove(ItemEntity itemId) {
+		// TODO Auto-generated method stub
+		itemRepository.delete(itemId);
+		
+	}
 }

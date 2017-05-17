@@ -136,7 +136,7 @@ public class NewBasicProjectApplicationTests {
 		ctx.close();
 	}
 	
-	@Test
+	//@Test
 	public void testSaveStyleItemsWithItemSizes()
 	{
 		Service styleService = (Service) ctx.getBean("serviceImpl");
@@ -212,6 +212,16 @@ public class NewBasicProjectApplicationTests {
 		ctx.close();
 	}
 	
+	//@Test
+	public void removeItem()
+	{
+		Service styleService = (Service) ctx.getBean("serviceImpl");
+		ItemEntity removeitem = styleService.findByItemId(244); 
+		styleService.remove(removeitem);		
+		ctx.close();
+	}
+	
+
 //	@Test
 	public void testUpdateItemWithItemSize()
 	{
@@ -243,7 +253,7 @@ public class NewBasicProjectApplicationTests {
 	public void testUpdateStyleWithItemSize()
 	{
 		Service styleService = (Service) ctx.getBean("serviceImpl");
-		StyleEntity styleEntity=styleService.findByStyleId(160);
+		StyleEntity styleEntity=styleService.findByStyleId(360);
 		Set<ItemSizeEntity> itemSizeEntities=new HashSet<ItemSizeEntity>();
 		Set<ItemEntity> itemEntities=new HashSet<ItemEntity>();
 		
