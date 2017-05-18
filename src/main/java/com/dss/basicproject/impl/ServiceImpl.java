@@ -43,8 +43,9 @@ public class ServiceImpl implements Service {
 
 	@Override
 	public StyleEntity findByStyleId(Integer styleid) {
-		// TODO Auto-generated method stub
-		return styleRepository.findOne(styleid);
+		StyleEntity style=styleRepository.findOne(styleid);
+		System.out.println("size is "+style.getItems());
+		return style;
 	}
 
 	@Override

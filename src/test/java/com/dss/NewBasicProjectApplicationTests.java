@@ -35,7 +35,7 @@ public class NewBasicProjectApplicationTests {
 
 	}
 
-	@Test
+	//@Test
 	public void testSaveStyle() {
 		Service styleService = (Service) ctx.getBean("serviceImpl");
 		ClientEntity client = masterService.findClientById(1);
@@ -52,7 +52,7 @@ public class NewBasicProjectApplicationTests {
 		ctx.close();
 	}
 
-	@Test
+	//@Test
 	public void testSaveStyleWithItems() {
 
 		ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext(
@@ -87,7 +87,7 @@ public class NewBasicProjectApplicationTests {
 	}
 
 	
-	@Test
+	//@Test
 	public void testSaveItemWithItemSizes() {
 
 		ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext(
@@ -122,7 +122,7 @@ public class NewBasicProjectApplicationTests {
 		ctx.close();
 	}
 
-	@Test
+	//@Test
 	public void testSaveStyleItemsWithItemSizes() {
 		Service styleService = (Service) ctx.getBean("serviceImpl");
 
@@ -221,7 +221,7 @@ public class NewBasicProjectApplicationTests {
 		ctx.close();
 	}
 
-	@Test
+	//@Test
 	public void testUpdateStyleWithItemSize() {
 		Service styleService = (Service) ctx.getBean("serviceImpl");
 		StyleEntity style = styleService.findByStyleId(36);
@@ -239,15 +239,15 @@ public class NewBasicProjectApplicationTests {
 		ctx.close();
 	}
 
-	@Test
+	//@Test
 	public void testRetrieveStyle() {
 		ServiceImpl styleService = (ServiceImpl) ctx.getBean("serviceImpl");
 		StyleEntity styleEntity = styleService.findByStyleId(36);
-		System.out.println(styleEntity);
+		System.out.println(styleEntity.getItems());
 
 	}
 
-	@Test
+	//@Test
 	public void testDeleteStyle() {
 		Service styleService = (Service) ctx.getBean("serviceImpl");
 		styleService.deleteStyle(166);
