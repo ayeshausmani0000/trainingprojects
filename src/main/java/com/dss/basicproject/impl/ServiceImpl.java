@@ -1,5 +1,7 @@
 package com.dss.basicproject.impl;
 
+import java.util.Set;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +44,9 @@ public class ServiceImpl implements Service {
 
 	@Override
 	public StyleEntity findByStyleId(Integer styleid) {
-		// TODO Auto-generated method stub
-		return styleRepository.findOne(styleid);
+		StyleEntity	style=styleRepository.findOne(styleid);
+		Set<ItemEntity> items=style.getItems();
+		return style;
 	}
 
 	@Override
@@ -58,8 +61,6 @@ public class ServiceImpl implements Service {
 
 	@Override
 	public ItemSizeEntity findByItemSizeId(Integer itemSizeId) {
-		System.out.println("Hello");
-		// TODO Auto-generated method stub
 		return itemSizeRepository.findOne(itemSizeId);
 	}
 
@@ -77,5 +78,12 @@ itemRepository.save(itemEntity);
 	public ItemEntity findByItemId(Integer itemId) {
 		// TODO Auto-generated method stub
 		return itemRepository.findOne(itemId);
+	}
+
+	@Override
+	public void deleteByStyle(Integer styleId) {
+		// TODO Auto-generated method stub
+		styleRepository.delete(styleId);
+		
 	}
 }

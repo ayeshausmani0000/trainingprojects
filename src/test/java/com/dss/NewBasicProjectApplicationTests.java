@@ -21,8 +21,6 @@ import com.dss.basicproject.model.ItemSizeEntity;
 import com.dss.basicproject.model.SeasonEntity;
 import com.dss.basicproject.model.SizeEntity;
 import com.dss.basicproject.model.StyleEntity;
-import com.dss.basicproject.service.ItemService;
-import com.dss.basicproject.service.ItemSizeService;
 import com.dss.basicproject.service.MasterService;
 import com.dss.basicproject.service.Service;
 
@@ -58,55 +56,8 @@ public class NewBasicProjectApplicationTests {
 	}
 
 	// @Test
-	public void testSaveStyleWithItems() {
-
-		ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext(
-				"springconfig.xml");
-		Service service = (Service) ctx.getBean("serviceImpl");
-		/* StyleEntity style = styleService.findByStyleId(14); */
-		ClientEntity client = masterService.findClientById(1);
-		CountryEntity country = masterService.findCountryById(2);
-		SeasonEntity season = masterService.findSeasonById(2);
-		StyleEntity style = new StyleEntity();
-		style.setStyleNo("Ay12356");
-		style.setDesc("floral shirt");
-		style.setSeason(season);
-		style.setCountry(country);
-		ItemEntity item1 = new ItemEntity();
-		item1.setItemNo("AY49687");
-		item1.setColor("blue");
-		item1.setStyle(style);
-		ItemEntity item2 = new ItemEntity();
-		item2.setItemNo("AY4967");
-		item2.setColor("green");
-		item2.setStyle(style);
-		Set<ItemEntity> items = new HashSet<ItemEntity>();
-		items.add(item1);
-		items.add(item2);
-		style.setItems(items);
-		;
-
-		service.saveStyle(style);
-
-		ctx.close();
-	}
-
-	// @Test
-	public void testSaveItemSize() {
-		ItemSizeService itemSizeService = (ItemSizeService) ctx
-				.getBean("itemSizeServiceImpl");
-		SizeEntity sizeEntity = masterService.findSizeById(1);
-
-		ItemSizeEntity itemSizeEntity = new ItemSizeEntity();
-		itemSizeEntity.setQuantity(20);
-		itemSizeEntity.setSize(sizeEntity);
-		itemSizeService.save(itemSizeEntity);
-
-	}
-
-	// @Test
 	public void testSaveStyleItemsWithItemSizes() {
-		Service service = (Service) ctx.getBean("serviceImpl");
+		Service styleService = (Service) ctx.getBean("serviceImpl");
 
 		ClientEntity client = masterService.findClientById(1);
 		CountryEntity country = masterService.findCountryById(2);
@@ -117,15 +68,18 @@ public class NewBasicProjectApplicationTests {
 		Set<ItemSizeEntity> itemSizeEntites = new HashSet<ItemSizeEntity>();
 
 		StyleEntity styleEntity = new StyleEntity();
-		styleEntity.setStyleNo("Style7689");
+		// styleEntity.setId(id);
+		styleEntity.setStyleNo("SeqTest9");
+		styleEntity.setDesc("JACKET");
 		styleEntity.setItems(itemEntites);
 		styleEntity.setClient(client);
 		styleEntity.setCountry(country);
 		styleEntity.setSeason(season);
 
 		ItemEntity item1 = new ItemEntity();
-		item1.setItemNo("AY123");
-		item1.setColor("blue");
+		// item1.setItemId(100);
+		item1.setItemNo("RAVI123");
+		item1.setColor("Red");
 
 		ItemSizeEntity itemSizeEntity1 = new ItemSizeEntity();
 		itemSizeEntity1.setQuantity(10);
@@ -145,59 +99,75 @@ public class NewBasicProjectApplicationTests {
 
 		itemEntites.add(item1);
 
-		service.saveStyle(styleEntity);
+		styleService.saveStyle(styleEntity);
+
+		ctx.close();
+	}
+
+	// @Test
+	public void testDeleteStyle() {
+		Service service = (Service) ctx.getBean("serviceImpl");
 
 	}
 
-	//@Test
-	public void testDeleteItem() {
+	// @Test
+	public void testUpdateStyle() {
 		Service service = (Service) ctx.getBean("serviceImpl");
-		ItemEntity item=service.findByItemId(210);
-		
-	List<ItemSizeEntity> itemSizeEntites = (List<ItemSizeEntity>) service.findAllItemSize();
-	
-	itemSizeEntites.remove(item);
-	for (ItemSizeEntity itemSizeEntity : itemSizeEntites) {
-		System.out.println(itemSizeEntity.getItem());
-	}
-	}
-	
-	@Test
-	public void testDeleteStyle(){
-		Service service = (Service) ctx.getBean("serviceImpl");
-		StyleEntity styleEntity=service.findByStyleId(155);
-		
-		styleEntity.setClient(null);
-		styleEntity.setCountry(null);
-		styleEntity.setDesc(null);
-		styleEntity.setItems(null);
-		styleEntity.setSeason(null);
-		styleEntity.setStyleNo(null);
-		service.saveStyle(styleEntity);
-		
-
-	}
-	
-	//@Test
-	public void testUpdateStyle(){
-		Service service = (Service) ctx.getBean("serviceImpl");
-		StyleEntity styleEntity=service.findByStyleId(196);
+		StyleEntity styleEntity = service.findByStyleId(196);
 		styleEntity.setStyleNo("ay1505");
 		styleEntity.setDesc("Blue Jeans");
-		
-		Set<ItemEntity> items=new HashSet<ItemEntity>();
-		ItemEntity itemEntity1=service.findByItemId(223);
+
+		Set<ItemEntity> items = new HashSet<ItemEntity>();
+		ItemEntity itemEntity1 = service.findByItemId(223);
 		itemEntity1.setStyle(styleEntity);
 		items.add(itemEntity1);
-		ItemEntity itemEntity2=service.findByItemId(233);
+		ItemEntity itemEntity2 = service.findByItemId(233);
 		itemEntity2.setStyle(styleEntity);
 		items.add(itemEntity2);
-		styleEntity.setItems(items);
+		// styleEntity.setItems(items);
 		service.saveStyle(styleEntity);
-		
 
 	}
-	
-		
-	
+
+	// @Test
+	public void testUpdateStyleWithItemSize() {
+		Service styleService = (Service) ctx.getBean("serviceImpl");
+		StyleEntity style = styleService.findByStyleId(36);
+		style.setDesc("new");
+		Set<ItemEntity> itemEntities = style.getItems();
+
+		for (ItemEntity itemEntity : itemEntities) {
+			itemEntity.setColor("RED");
+			Set<ItemSizeEntity> itemSizes = itemEntity.getItemSizes();
+			for (ItemSizeEntity itemSizeEntity : itemSizes) {
+				itemSizeEntity.setQuantity(8);
+			}
+		}
+		styleService.saveStyle(style);
+		ctx.close();
+	}
+
+	// @Test
+	public void deleteStyle() {
+		Service service = (Service) ctx.getBean("serviceImpl");
+		service.deleteByStyle(11);
+	}
+
+	@Test
+	public void retrieveItemSizeThroughStyle() {
+		Service styleService = (Service) ctx.getBean("serviceImpl");
+		StyleEntity style = styleService.findByStyleId(36);
+		//Set<ItemEntity> itemEntities = style.getItems();
+		System.out.println(style);
+		/*for (ItemEntity itemEntity : itemEntities) {
+			System.out.println(itemEntity.getItemId());
+			itemEntity.setColor("RED");
+			Set<ItemSizeEntity> itemSizes = itemEntity.getItemSizes();
+			for (ItemSizeEntity itemSizeEntity : itemSizes) {
+				System.out.println(itemSizeEntity.getItemsizeId());
+			}
+		}*/
+		ctx.close();
+	}
+
 }
