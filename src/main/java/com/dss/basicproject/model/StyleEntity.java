@@ -1,6 +1,5 @@
 package com.dss.basicproject.model;
 
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -40,11 +39,11 @@ public class StyleEntity {
 	@JoinColumn(name = "country_id")
 	private CountryEntity country;
 
-	@OneToMany(mappedBy = "style", cascade=CascadeType.ALL, orphanRemoval=true, fetch=FetchType.LAZY)
+	@OneToMany(mappedBy = "style", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	private Set<ItemEntity> items;
 
 	@ManyToOne
-	@JoinColumn(name="client_id")
+	@JoinColumn(name = "client_id")
 	private ClientEntity client;
 
 	public ClientEntity getClient() {
@@ -54,8 +53,6 @@ public class StyleEntity {
 	public void setClient(ClientEntity client) {
 		this.client = client;
 	}
-
-	
 
 	public Set<ItemEntity> getItems() {
 		return items;

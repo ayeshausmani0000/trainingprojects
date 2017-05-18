@@ -34,7 +34,7 @@ public class ItemEntity {
 	@JoinColumn(name = "style_id")
 	private StyleEntity style;
 
-	@OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.EAGER,orphanRemoval=true)
+	@OneToMany(mappedBy = "item", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
 	private Set<ItemSizeEntity> itemSizes;
 
 	public Set<ItemSizeEntity> getItemSizes() {

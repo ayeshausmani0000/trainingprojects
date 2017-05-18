@@ -23,6 +23,8 @@ public interface Service {
 	public Iterable<ItemEntity> findAllItems();
 
 	public ItemEntity findByItemId(Integer id);
+
+	public void deleteStyle(Integer styleId);
+
 	
-	public void deleteByStyle(Integer styleId);
 }

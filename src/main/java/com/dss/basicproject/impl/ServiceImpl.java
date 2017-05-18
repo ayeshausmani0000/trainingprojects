@@ -1,6 +1,5 @@
-package com.dss.basicproject.impl;
 
-import java.util.Set;
+package com.dss.basicproject.impl;
 
 import javax.sql.DataSource;
 
@@ -44,9 +43,8 @@ public class ServiceImpl implements Service {
 
 	@Override
 	public StyleEntity findByStyleId(Integer styleid) {
-		StyleEntity	style=styleRepository.findOne(styleid);
-		Set<ItemEntity> items=style.getItems();
-		return style;
+		// TODO Auto-generated method stub
+		return styleRepository.findOne(styleid);
 	}
 
 	@Override
@@ -61,11 +59,14 @@ public class ServiceImpl implements Service {
 
 	@Override
 	public ItemSizeEntity findByItemSizeId(Integer itemSizeId) {
+		System.out.println("Hello");
+		// TODO Auto-generated method stub
 		return itemSizeRepository.findOne(itemSizeId);
 	}
 
 	@Override
 	public void saveItem(ItemEntity itemEntity) {
+		System.out.println("Item Save");
 itemRepository.save(itemEntity);
 	}
 
@@ -80,10 +81,10 @@ itemRepository.save(itemEntity);
 		return itemRepository.findOne(itemId);
 	}
 
+
 	@Override
-	public void deleteByStyle(Integer styleId) {
+	public void deleteStyle(Integer styleId) {
 		// TODO Auto-generated method stub
 		styleRepository.delete(styleId);
-		
 	}
 }
