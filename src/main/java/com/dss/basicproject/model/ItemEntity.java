@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,7 +34,7 @@ public class ItemEntity {
 	@JoinColumn(name = "style_id")
 	private StyleEntity style;
 
-	@OneToMany(mappedBy="item", cascade = CascadeType.REMOVE, orphanRemoval=true)
+	@OneToMany(mappedBy="item", cascade = CascadeType.MERGE, fetch=FetchType.EAGER)
 	private Set<ItemSizeEntity> itemSizes;
 	
 	
