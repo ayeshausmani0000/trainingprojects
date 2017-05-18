@@ -3,22 +3,24 @@ package com.dss.basicproject.model;
 import java.util.List;
 import java.util.Set;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
+@SequenceGenerator(name = "ITEM_SIZE_SEQ", allocationSize = 1, sequenceName = "BASICSEQ")
 @Table(name = "itemsize")
 public class ItemSizeEntity {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ITEM_SIZE_SEQ")
 	@Column(name = "itemsize_id")
 	private Integer itemsizeId;
 
@@ -30,7 +32,7 @@ public class ItemSizeEntity {
 	private Integer quantity;
 
 	@ManyToOne
-	@JoinColumn(name="item_id")
+	@JoinColumn(name = "item_id")
 	private ItemEntity item;
 
 	public ItemEntity getItem() {
@@ -48,8 +50,6 @@ public class ItemSizeEntity {
 	public void setItemsizeId(Integer itemsizeId) {
 		this.itemsizeId = itemsizeId;
 	}
-
-	
 
 	public SizeEntity getSize() {
 		return size;

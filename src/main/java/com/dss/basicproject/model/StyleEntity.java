@@ -16,12 +16,12 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@SequenceGenerator(name = "BASICSEQ", allocationSize = 1)
+@SequenceGenerator(name = "STYLE_SEQ", allocationSize = 1, sequenceName = "BASICSEQ")
 @Table(name = "style")
 public class StyleEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BASICSEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "STYLE_SEQ")
 	@Column(name = "style_id")
 	private Integer id;
 
@@ -39,11 +39,11 @@ public class StyleEntity {
 	@JoinColumn(name = "country_id")
 	private CountryEntity country;
 
-	@OneToMany(mappedBy = "style", cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "style", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	private Set<ItemEntity> items;
 
 	@ManyToOne
-	@JoinColumn(name="client_id")
+	@JoinColumn(name = "client_id")
 	private ClientEntity client;
 
 	public ClientEntity getClient() {

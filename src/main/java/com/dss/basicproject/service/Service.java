@@ -24,5 +24,7 @@ public interface Service {
 
 	public ItemEntity findByItemId(Integer id);
 
-	public void remove(ItemEntity itemId);
+	public void deleteStyle(Integer styleId);
+
+	
 }
