@@ -43,8 +43,10 @@ public class ServiceImpl implements Service {
 
 	@Override
 	public StyleEntity findByStyleId(Integer styleid) {
-		StyleEntity style=styleRepository.findOne(styleid);
-		System.out.println("size is "+style.getItems());
+		// StyleEntity style=styleRepository.findOne(styleid);
+		StyleEntity style = styleRepository.findById(styleid);
+		// StyleEntity style=styleRepository.findByIdUsingJpql(styleid);
+		// System.out.println("size is "+style.getItems());
 		return style;
 	}
 
@@ -60,15 +62,15 @@ public class ServiceImpl implements Service {
 
 	@Override
 	public ItemSizeEntity findByItemSizeId(Integer itemSizeId) {
-		System.out.println("Hello");
+		// System.out.println("Hello");
 		// TODO Auto-generated method stub
 		return itemSizeRepository.findOne(itemSizeId);
 	}
 
 	@Override
 	public void saveItem(ItemEntity itemEntity) {
-		System.out.println("Item Save");
-itemRepository.save(itemEntity);
+		// System.out.println("Item Save");
+		itemRepository.save(itemEntity);
 	}
 
 	@Override
@@ -81,7 +83,6 @@ itemRepository.save(itemEntity);
 		// TODO Auto-generated method stub
 		return itemRepository.findOne(itemId);
 	}
-
 
 	@Override
 	public void deleteStyle(Integer styleId) {

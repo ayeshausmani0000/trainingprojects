@@ -1,5 +1,10 @@
 package com.dss.basicproject.service;
 
+import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.jpa.repository.EntityGraph.EntityGraphType;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
 import com.dss.basicproject.model.ItemEntity;
 import com.dss.basicproject.model.ItemSizeEntity;
 import com.dss.basicproject.model.StyleEntity;
@@ -26,5 +31,4 @@ public interface Service {
 
 	public void deleteStyle(Integer styleId);
 
-	
 }

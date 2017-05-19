@@ -11,6 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -18,6 +21,7 @@ import javax.persistence.Table;
 @Entity
 @SequenceGenerator(name = "STYLE_SEQ", allocationSize = 1, sequenceName = "BASICSEQ")
 @Table(name = "style")
+@NamedEntityGraph(name = "graph.Style.items", attributeNodes = @NamedAttributeNode(value = "items", subgraph = "graph.itemSizes"), subgraphs = @NamedSubgraph(name = "graph.itemSizes", attributeNodes = @NamedAttributeNode("itemSizes")))
 public class StyleEntity {
 
 	@Id
@@ -100,6 +104,11 @@ public class StyleEntity {
 
 	public void setCountry(CountryEntity countryid) {
 		this.country = countryid;
+	}
+
+	@Override
+	public String toString() {
+		return "StyleEntity [id=" + id + ", styleNo=" + styleNo + ", desc=" + desc + "]";
 	}
 
 }

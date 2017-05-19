@@ -34,7 +34,7 @@ public class ItemEntity {
 	@JoinColumn(name = "style_id")
 	private StyleEntity style;
 
-	@OneToMany(mappedBy = "item", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	private Set<ItemSizeEntity> itemSizes;
 
 	public Set<ItemSizeEntity> getItemSizes() {
@@ -75,6 +75,11 @@ public class ItemEntity {
 
 	public void setStyle(StyleEntity style) {
 		this.style = style;
+	}
+
+	@Override
+	public String toString() {
+		return "ItemEntity [itemId=" + itemId + ", color=" + color + "]";
 	}
 
 }

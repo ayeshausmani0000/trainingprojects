@@ -66,4 +66,10 @@ public class ItemSizeEntity {
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
+
+	@Override
+	public String toString() {
+		return "ItemSizeEntity [itemsizeId=" + itemsizeId + ", size=" + size + ", quantity=" + quantity + "]";
+	}
+	
 }

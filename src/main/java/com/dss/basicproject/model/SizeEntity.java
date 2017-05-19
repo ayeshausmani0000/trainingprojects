@@ -30,5 +30,9 @@ public class SizeEntity {
 	public void setSizeCode(String sizeCode) {
 		this.sizeCode = sizeCode;
 	}
+	@Override
+	public String toString() {
+		return "SizeEntity [sizeCode=" + sizeCode + "]";
+	}
 
 }
