@@ -56,12 +56,13 @@ public class EntityManagerServiceImpl implements Service {
 	@Transactional
 	public StyleEntity findByStyleId(Integer styleid) {
 		
-		StringBuilder sb = new StringBuilder();
+		/*StringBuilder sb = new StringBuilder();
 		sb.append(" SELECT s FROM StyleEntity s ");
 		sb.append(" LEFT JOIN FETCH s.items i ");
 		sb.append(" LEFT JOIN FETCH i.itemSizes  ");
 		sb.append("  WHERE s.id =:sid ");
-		Query query = entityManager.createQuery(sb.toString());
+		Query query = entityManager.createQuery(sb.toString());*/
+		Query query = entityManager.createNamedQuery("findStyleUsingID");
 		query.setParameter("sid", styleid);
 		return (StyleEntity) query.getSingleResult();
 		
