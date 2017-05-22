@@ -79,7 +79,9 @@ public class ItemEntity {
 
 	@Override
 	public String toString() {
-		return "ItemEntity [itemId=" + itemId + ", color=" + color + "]";
+		return "ItemEntity [itemId=" + itemId + ", color=" + color + ", itemSizes=" + itemSizes + "]";
 	}
+
+	
 
 }

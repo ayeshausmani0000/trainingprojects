@@ -108,7 +108,10 @@ public class StyleEntity {
 
 	@Override
 	public String toString() {
-		return "StyleEntity [id=" + id + ", styleNo=" + styleNo + ", desc=" + desc + "]";
+		return "StyleEntity [id=" + id + ", styleNo=" + styleNo + ", desc=" + desc + ", items=" + items + "]";
 	}
+
+	
+	
 
 }

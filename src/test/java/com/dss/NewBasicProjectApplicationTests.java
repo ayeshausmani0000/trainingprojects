@@ -3,6 +3,7 @@ package com.dss;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +12,9 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
-import com.dss.basicproject.impl.ServiceImpl;
+
+import com.dss.basicproject.impl.EntityManagerServiceImpl;
+import com.dss.basicproject.impl.SpringDataServiceImpl;
 import com.dss.basicproject.model.ClientEntity;
 import com.dss.basicproject.model.CountryEntity;
 import com.dss.basicproject.model.ItemEntity;
@@ -19,7 +22,6 @@ import com.dss.basicproject.model.ItemSizeEntity;
 import com.dss.basicproject.model.SeasonEntity;
 import com.dss.basicproject.model.SizeEntity;
 import com.dss.basicproject.model.StyleEntity;
-
 import com.dss.basicproject.service.MasterService;
 import com.dss.basicproject.service.Service;
 
@@ -39,7 +41,7 @@ public class NewBasicProjectApplicationTests {
 
 	 @Test
 	public void testSaveStyle() {
-		Service styleService = (Service) ctx.getBean("serviceImpl");
+		Service styleService = (Service) ctx.getBean("springDataServiceImpl");
 		ClientEntity client = masterService.findClientById(1);
 		CountryEntity country = masterService.findCountryById(2);
 		SeasonEntity season = masterService.findSeasonById(2);
@@ -59,7 +61,7 @@ public class NewBasicProjectApplicationTests {
 
 		ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("springconfig.xml");
 				
-		Service styleService = (Service) ctx.getBean("serviceImpl");
+		Service styleService = (Service) ctx.getBean("springDataServiceImpl");
 		@SuppressWarnings("unused")
 		ClientEntity client = masterService.findClientById(1);
 		CountryEntity country = masterService.findCountryById(2);
@@ -92,7 +94,7 @@ public class NewBasicProjectApplicationTests {
 
 		ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext(
 				"springconfig.xml");
-		Service styleService = (Service) ctx.getBean("serviceImpl");
+		Service styleService = (Service) ctx.getBean("springDataServiceImpl");
 		
 		StyleEntity style = styleService.findByStyleId(113);
 		SizeEntity size=masterService.findSizeById(1);
@@ -127,7 +129,7 @@ public class NewBasicProjectApplicationTests {
 	{
 
 		
-		Service styleService = (Service) ctx.getBean("serviceImpl");
+		Service styleService = (Service) ctx.getBean("springDataServiceImpl");
 		
 		ClientEntity client = masterService.findClientById(1);
 		CountryEntity country = masterService.findCountryById(2);
@@ -179,7 +181,7 @@ public class NewBasicProjectApplicationTests {
 //	@Test
 	public void testUpdateStyleWithItem()
 	{
-		Service styleService = (Service) ctx.getBean("serviceImpl");
+		Service styleService = (Service) ctx.getBean("springDataServiceImpl");
 		StyleEntity styleEntity=styleService.findByStyleId(224);
 		styleEntity.setDesc("Red Jeans");
 		styleEntity.setStyleNo("H1505");
@@ -205,7 +207,7 @@ public class NewBasicProjectApplicationTests {
 //	@Test
 	public void testUpdateItemWithItemSize()
 	{
-		Service styleService = (Service) ctx.getBean("serviceImpl");
+		Service styleService = (Service) ctx.getBean("springDataServiceImpl");
 		ItemEntity itemEntity=styleService.findByItemId(161);
 		itemEntity.setColor("YELLOW");
 		itemEntity.setItemNo("HM1505");
@@ -232,7 +234,7 @@ public class NewBasicProjectApplicationTests {
 	@Test
 	public void testUpdateStyleWithItemSize()
 	{
-		Service styleService = (Service) ctx.getBean("serviceImpl");
+		Service styleService = (Service) ctx.getBean("springDataServiceImpl");
 		StyleEntity style = styleService.findByStyleId(80);
 		style.setDesc("newBatman");
 		Set<ItemEntity> itemEntities = style.getItems();
@@ -258,7 +260,7 @@ public class NewBasicProjectApplicationTests {
 	@Test
 	public void testRetrieveStyle()
 	{
-		ServiceImpl styleService = (ServiceImpl) ctx.getBean("serviceImpl");
+		SpringDataServiceImpl styleService = (SpringDataServiceImpl) ctx.getBean("springDataServiceImpl");
 		StyleEntity styleEntity=styleService.findByStyleId(36);
 		Set<ItemEntity> items= styleEntity.getItems();
 		System.out.println(styleEntity);
@@ -280,5 +282,17 @@ public class NewBasicProjectApplicationTests {
 		Service styleService = (Service) ctx.getBean("serviceImpl");
 		styleService.deleteStyle(166);
 		
+	}
+	
+	@Test
+	public void testfindStyleByIdUsingEm() {
+
+				EntityManagerServiceImpl styleService = (EntityManagerServiceImpl) ctx.getBean("entityManagerServiceImpl");
+				/*Iterable<StyleEntity> styleEntities = styleService.findAllStyles();
+				for (StyleEntity styleEntity : styleEntities) {
+					System.out.println(styleEntity);
+				}*/
+				StyleEntity style=styleService.findByStyleId(139);
+				System.out.println(style);
 	}
 }

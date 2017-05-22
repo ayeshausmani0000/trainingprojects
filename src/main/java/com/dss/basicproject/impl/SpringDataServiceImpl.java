@@ -13,7 +13,7 @@ import com.dss.basicproject.repository.ItemSizeRepository;
 import com.dss.basicproject.repository.StyleRepository;
 import com.dss.basicproject.service.Service;
 
-public class ServiceImpl implements Service {
+public class SpringDataServiceImpl implements Service {
 
 	@Autowired
 	private StyleRepository styleRepository;
@@ -44,8 +44,8 @@ public class ServiceImpl implements Service {
 	@Override
 	public StyleEntity findByStyleId(Integer styleid) {
 		// StyleEntity style=styleRepository.findOne(styleid);
-		StyleEntity style = styleRepository.findById(styleid);
-		// StyleEntity style=styleRepository.findByIdUsingJpql(styleid);
+		//StyleEntity style = styleRepository.findById(styleid);
+		 StyleEntity style=styleRepository.findByIdUsingJpql(styleid);
 		// System.out.println("size is "+style.getItems());
 		return style;
 	}
