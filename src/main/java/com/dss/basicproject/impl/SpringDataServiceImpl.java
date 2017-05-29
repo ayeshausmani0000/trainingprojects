@@ -5,8 +5,10 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.dss.basicproject.model.ClientEntity;
 import com.dss.basicproject.model.ItemEntity;
 import com.dss.basicproject.model.ItemSizeEntity;
+import com.dss.basicproject.model.SeasonEntity;
 import com.dss.basicproject.model.StyleEntity;
 import com.dss.basicproject.repository.ItemRepository;
 import com.dss.basicproject.repository.ItemSizeRepository;
@@ -88,5 +90,18 @@ public class SpringDataServiceImpl implements Service {
 	public void deleteStyle(Integer styleId) {
 		// TODO Auto-generated method stub
 		styleRepository.delete(styleId);
+	}
+
+	@Override
+	public StyleEntity findByStyleIdWithItems(Integer styleid) {
+		// StyleEntity styleEntity = styleRepository.findById(styleid);
+		StyleEntity styleEntity = styleRepository.findByIdUsingJpql(styleid);
+		return styleEntity;
+	}
+
+	@Override
+	public boolean isStyleExist(StyleEntity styleEntity, SeasonEntity seasonEntity, ClientEntity clientEntity) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

@@ -38,7 +38,7 @@ public class NewBasicProjectApplicationTests {
 		masterService = (MasterService) ctx.getBean("masterServiceImpl");
 
 	}
-
+	
 	 @Test
 	public void testSaveStyle() {
 		Service styleService = (Service) ctx.getBean("springDataServiceImpl");
@@ -260,7 +260,7 @@ public class NewBasicProjectApplicationTests {
 	@Test
 	public void testRetrieveStyle()
 	{
-		SpringDataServiceImpl styleService = (SpringDataServiceImpl) ctx.getBean("springDataServiceImpl");
+		Service styleService = (Service) ctx.getBean("springDataServiceImpl");
 		StyleEntity styleEntity=styleService.findByStyleId(36);
 		Set<ItemEntity> items= styleEntity.getItems();
 		System.out.println(styleEntity);
@@ -287,12 +287,157 @@ public class NewBasicProjectApplicationTests {
 	@Test
 	public void testfindStyleByIdUsingEm() {
 
-				EntityManagerServiceImpl styleService = (EntityManagerServiceImpl) ctx.getBean("entityManagerServiceImpl");
+				Service styleService = (Service) ctx.getBean("entityManagerServiceImpl");
 				/*Iterable<StyleEntity> styleEntities = styleService.findAllStyles();
 				for (StyleEntity styleEntity : styleEntities) {
 					System.out.println(styleEntity);
 				}*/
 				StyleEntity style=styleService.findByStyleId(139);
 				System.out.println(style);
+				
 	}
+	
+	//Retrieved data using Native query	
+		@Test
+		public void testRetrieveStyleUsingNativeQuery()
+		{
+			Service entityManagerService=(Service) ctx.getBean("entityManagerServiceImpl");
+
+			StyleEntity styleEntity=entityManagerService.findByStyleId(50);
+			System.out.println(styleEntity.getDesc()+" "+styleEntity.getItems());
+			/*Iterable<StyleEntity> styleIterable=entityManagerService.findAllStyles();
+			for (StyleEntity styleEntity : styleIterable) {
+				System.out.println(styleEntity.getId());
+			}*/
+		}
+		
+	//Retrieved data using Named query	
+		@Test
+		public void testRetrieveStyleUsingNamedQuery()
+		{
+			Service entityManagerService=(Service) ctx.getBean("entityManagerServiceImpl");
+			StyleEntity styleEntity=entityManagerService.findByStyleId(50);
+			System.out.println(styleEntity.getItems());
+			/*Iterable<StyleEntity> styleIterable=entityManagerService.findAllStyles();
+			for (StyleEntity styleEntity : styleIterable) {
+				System.out.println(styleEntity.getId()+" "+styleEntity.getStyleNo()+" "+styleEntity.getDesc());
+			}*/
+		}
+		
+		@Test
+		public void testSaveStyleWithEntituManager()
+		{
+			Service entityMangaer = (Service) ctx.getBean("entityManagerServiceImpl");
+			
+			ClientEntity client = masterService.findClientById(4);
+			CountryEntity country = masterService.findCountryById(1);
+			SeasonEntity season = masterService.findSeasonById(2);
+			SizeEntity size=masterService.findSizeById(1);
+			
+			Set<ItemEntity> itemEntites = new HashSet<ItemEntity>();
+			Set<ItemSizeEntity> itemSizeEntites = new HashSet<ItemSizeEntity>();
+			
+			StyleEntity styleEntity= new StyleEntity();
+			styleEntity.setStyleNo("Lily_1");
+			styleEntity.setDesc("cute");
+			styleEntity.setItems(itemEntites);
+			styleEntity.setClient(client);
+			styleEntity.setCountry(country);
+			styleEntity.setSeason(season);
+			
+			ItemEntity item1 = new ItemEntity();
+			item1.setItemNo("Lily-11");
+			item1.setColor("Green");
+			
+			ItemSizeEntity itemSizeEntity1 = new ItemSizeEntity();
+			itemSizeEntity1.setQuantity(10);
+			itemSizeEntity1.setSize(size);
+			itemSizeEntity1.setItem(item1);
+			
+
+			ItemSizeEntity itemSizeEntity2 = new ItemSizeEntity();
+			itemSizeEntity2.setQuantity(20);
+			itemSizeEntity2.setSize(size);
+			itemSizeEntity2.setItem(item1);
+			
+			
+			itemSizeEntites.add(itemSizeEntity1);
+			itemSizeEntites.add(itemSizeEntity2);
+			
+			item1.setItemSizes(itemSizeEntites);
+			item1.setStyle(styleEntity);
+			
+			itemEntites.add(item1);
+			
+			entityMangaer.saveStyle(styleEntity);
+			
+			ctx.close();
+		}
+		 
+		
+		@Test
+		public void testHibernateInitializer()
+		{
+			
+			Service entityMangaer = (Service) ctx.getBean("entityManagerServiceImpl");
+			StyleEntity styleEntity=entityMangaer.findByStyleId(61);
+			Set<ItemEntity> itemEntities=styleEntity.getItems();
+			for (ItemEntity itemEntity : itemEntities) {
+				System.out.println(itemEntity.getColor()+" "+itemEntity.getItemSizes());
+			}
+		}
+		
+		@Test
+		public void testValidation()
+		{
+			Service entityMangaer= (Service) ctx.getBean("entityManagerServiceImpl");
+			
+			ClientEntity client = masterService.findClientById(1);
+			CountryEntity country = masterService.findCountryById(2);
+			SeasonEntity season = masterService.findSeasonById(2);
+			SizeEntity size=masterService.findSizeById(1);
+			
+			Set<ItemEntity> itemEntites = new HashSet<ItemEntity>();
+			Set<ItemSizeEntity> itemSizeEntites = new HashSet<ItemSizeEntity>();
+			
+			StyleEntity styleEntity= new StyleEntity();
+			styleEntity.setStyleNo("ay1505");
+			styleEntity.setDesc("JACKET");
+			styleEntity.setItems(itemEntites);
+			styleEntity.setClient(client);
+			styleEntity.setCountry(country);
+			styleEntity.setSeason(season);
+			
+			ItemEntity item1 = new ItemEntity();
+			item1.setItemNo("HEMLATA545");
+			item1.setColor("Red");
+			
+			ItemSizeEntity itemSizeEntity1 = new ItemSizeEntity();
+			itemSizeEntity1.setQuantity(10);
+			itemSizeEntity1.setSize(size);
+			itemSizeEntity1.setItem(item1);
+			
+
+			ItemSizeEntity itemSizeEntity2 = new ItemSizeEntity();
+			itemSizeEntity2.setQuantity(20);
+			itemSizeEntity2.setSize(size);
+			itemSizeEntity2.setItem(item1);
+			
+			
+			itemSizeEntites.add(itemSizeEntity1);
+			itemSizeEntites.add(itemSizeEntity2);
+			
+			item1.setItemSizes(itemSizeEntites);
+			item1.setStyle(styleEntity);
+			
+			itemEntites.add(item1);
+			
+			if(entityMangaer.isStyleExist(styleEntity, season, client))
+				System.out.println("Duplicate");
+			else
+			entityMangaer.saveStyle(styleEntity);
+			
+			ctx.close();
+		}
+
 }

@@ -11,7 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -20,7 +22,7 @@ import javax.persistence.Table;
 @SequenceGenerator(name = "STYLE_SEQ", allocationSize = 1, sequenceName = "BASICSEQ")
 @Table(name = "style")
 //@NamedEntityGraph(name = "graph.Style.items", attributeNodes = @NamedAttributeNode(value = "items", subgraph = "graph.itemSizes"), subgraphs = @NamedSubgraph(name = "graph.itemSizes", attributeNodes = @NamedAttributeNode("itemSizes")))
-@NamedQuery(name="findStyleUsingID", query="SELECT s FROM StyleEntity s LEFT JOIN FETCH s.items i LEFT JOIN FETCH i.itemSizes WHERE s.id =:sid ")
+//@NamedQuery(name="findStyleUsingID", query="SELECT s FROM StyleEntity s LEFT JOIN FETCH s.items i LEFT JOIN FETCH i.itemSizes WHERE s.id =:sid ")
 public class StyleEntity {
 
 	@Id
@@ -107,7 +109,7 @@ public class StyleEntity {
 
 	@Override
 	public String toString() {
-		return "StyleEntity [id=" + id + ", styleNo=" + styleNo + ", desc=" + desc + ", items=" + items + "]";
+		return "StyleEntity [id=" + id + ", styleNo=" + styleNo + ", desc=" + desc + "]";
 	}
 
 	

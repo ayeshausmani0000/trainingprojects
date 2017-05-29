@@ -17,7 +17,20 @@
 	<bean id="entityManagerServiceImpl" class="com.dss.basicproject.impl.EntityManagerServiceImpl">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
-
+	
+	<bean id="emDaoImpl" class="com.dss.basicproject.dao.EMDaoImpl">
+	<property name="dataSource" ref="dataSource"></property>
+	
+	</bean>
+	
+	
+	<!-- <bean id="hibernateUtil" class="com.dss.basicproject.util.HibernateUtil">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean> -->
+	<!-- <bean id="emf"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+	
+	</bean> -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
