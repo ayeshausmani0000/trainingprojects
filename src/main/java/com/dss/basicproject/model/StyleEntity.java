@@ -11,13 +11,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedQuery;
+import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+
 @Entity
+@NamedEntityGraph(name = "graph.style.items", attributeNodes = 
+@NamedAttributeNode(value = "items", subgraph = "items"),
+subgraphs = @NamedSubgraph(name = "items", attributeNodes = @NamedAttributeNode("itemSizes")))
 @SequenceGenerator(name = "STYLE_SEQ", allocationSize = 1, sequenceName = "BASICSEQ")
 @Table(name = "style")
+//@NamedQuery(name="selectQuery", query="select s from StyleEntity s left join fetch s.items  ")
 public class StyleEntity {
 
 	@Id
@@ -45,6 +55,22 @@ public class StyleEntity {
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private ClientEntity client;
+
+	public StyleEntity(){
+		
+	}
+	
+	public StyleEntity(String styleNo, String desc) {
+		this.styleNo = styleNo;
+		this.desc = desc;
+	}
+
+	@Override
+	public String toString() {
+		return "StyleEntity [id=" + id + ", styleNo=" + styleNo + ", desc="
+				+ desc + ", season=" + season + ", country=" + country
+				+ ", client=" + client + "]";
+	}
 
 	public ClientEntity getClient() {
 		return client;

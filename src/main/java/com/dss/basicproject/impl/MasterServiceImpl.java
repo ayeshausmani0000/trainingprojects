@@ -81,4 +81,6 @@ public class MasterServiceImpl implements MasterService {
 		// TODO Auto-generated method stub
 		return sizeRepository.findOne(id);
 	}
+	
+	
 }

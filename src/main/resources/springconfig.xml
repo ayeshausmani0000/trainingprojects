@@ -10,8 +10,16 @@
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 
+
+	<bean id="entityManagerServiceImpl" class="com.dss.basicproject.impl.EntityManagerServiceImpl">
+
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
 	<bean id="serviceImpl" class="com.dss.basicproject.impl.ServiceImpl">
 		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+	<bean id="emDaoImpl" class="com.dss.basicproject.dao.EmDaoImpl">
 	</bean>
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
@@ -25,5 +33,4 @@
 		<property name="minIdle" value="5"></property>
 		<property name="maxActive" value="20"></property>
 	</bean>
-
 </beans>

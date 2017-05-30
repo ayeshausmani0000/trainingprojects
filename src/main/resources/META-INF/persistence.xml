@@ -6,6 +6,7 @@
 	version="1.0">
 
 	<persistence-unit name="QuickStart">
+	
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" />

@@ -19,6 +19,11 @@ import javax.persistence.Table;
 @SequenceGenerator(name = "ITEM_SEQ", allocationSize = 1, sequenceName = "BASICSEQ")
 @Table(name = "item")
 public class ItemEntity {
+	@Override
+	public String toString() {
+		return "ItemEntity [color=" + color + ", itemNo=" + itemNo + "]";
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ITEM_SEQ")
 	@Column(name = "item_id")

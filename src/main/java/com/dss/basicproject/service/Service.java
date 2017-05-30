@@ -1,7 +1,11 @@
 package com.dss.basicproject.service;
 
+import org.springframework.data.repository.query.Param;
+
+import com.dss.basicproject.model.ClientEntity;
 import com.dss.basicproject.model.ItemEntity;
 import com.dss.basicproject.model.ItemSizeEntity;
+import com.dss.basicproject.model.SeasonEntity;
 import com.dss.basicproject.model.StyleEntity;
 
 public interface Service {
@@ -22,9 +26,11 @@ public interface Service {
 
 	public Iterable<ItemEntity> findAllItems();
 
+	public boolean isStyleExist(StyleEntity styleEntity,
+			SeasonEntity seasonEntity, ClientEntity clientEntity);
+
 	public ItemEntity findByItemId(Integer id);
 
 	public void deleteStyle(Integer styleId);
 
-	
 }
