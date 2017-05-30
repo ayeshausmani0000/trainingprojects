@@ -13,13 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
-import javax.persistence.NamedQuery;
 import javax.persistence.NamedSubgraph;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.LazyCollection;
 
 @Entity
 @NamedEntityGraph(name = "graph.style.items", attributeNodes = 
@@ -28,6 +26,8 @@ subgraphs = @NamedSubgraph(name = "items", attributeNodes = @NamedAttributeNode(
 @SequenceGenerator(name = "STYLE_SEQ", allocationSize = 1, sequenceName = "BASICSEQ")
 @Table(name = "style")
 //@NamedQuery(name="selectQuery", query="select s from StyleEntity s left join fetch s.items  ")
+//@NamedEntityGraph(name = "graph.Style.items", attributeNodes = @NamedAttributeNode(value = "items", subgraph = "graph.itemSizes"), subgraphs = @NamedSubgraph(name = "graph.itemSizes", attributeNodes = @NamedAttributeNode("itemSizes")))
+//@NamedQuery(name="findStyleUsingID", query="SELECT s FROM StyleEntity s LEFT JOIN FETCH s.items i LEFT JOIN FETCH i.itemSizes WHERE s.id =:sid ")
 public class StyleEntity {
 
 	@Id
@@ -127,5 +127,10 @@ public class StyleEntity {
 	public void setCountry(CountryEntity countryid) {
 		this.country = countryid;
 	}
+
+	
+
+	
+	
 
 }

@@ -29,5 +29,9 @@ public interface StyleRepository extends CrudRepository<StyleEntity, Integer> {
 	 * @Query("select newStyle(s.id,s.) from StyleEntity s where s.id=:sid")
 	 * public StyleEntity findByIdByJpql(@Param("sid")Integer styleId);
 	 */
+	@Query("SELECT s FROM StyleEntity s LEFT JOIN FETCH s.items i LEFT JOIN FETCH i.itemSizes WHERE s.id =:sid")
+	StyleEntity findByIdUsingJpql(@Param("sid") Integer styleId);
 
+	//@Query("SELECT * FROM StyleEntity")
+	//StyleEntity findAll();
 }

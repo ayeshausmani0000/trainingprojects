@@ -34,5 +34,6 @@ public class SizeEntity {
 	public void setSizeCode(String sizeCode) {
 		this.sizeCode = sizeCode;
 	}
+	
 
 }

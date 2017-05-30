@@ -57,6 +57,10 @@ public class SpringDataServiceImpl implements Service {
 	@Override
 	public void deleteStyle(Integer id) {
 		styleRepository.delete(id);
+		// StyleEntity style=styleRepository.findOne(styleid);
+		//StyleEntity style = styleRepository.findById(styleid);
+		 StyleEntity style=styleRepository.findByIdUsingJpql(id);
+		// System.out.println("size is "+style.getItems());
 	}
 
 	@Override
@@ -71,11 +75,14 @@ public class SpringDataServiceImpl implements Service {
 
 	@Override
 	public ItemSizeEntity findByItemSizeId(Integer itemSizeId) {
+		// System.out.println("Hello");
+		// TODO Auto-generated method stub
 		return itemSizeRepository.findOne(itemSizeId);
 	}
 
 	@Override
 	public void saveItem(ItemEntity itemEntity) {
+		// System.out.println("Item Save");
 		itemRepository.save(itemEntity);
 	}
 
@@ -99,4 +106,11 @@ public class SpringDataServiceImpl implements Service {
 		return false;
 	}
 
-}
+	@Override
+	public StyleEntity findByStyleIdWithItems(Integer styleid) {
+		// StyleEntity styleEntity = styleRepository.findById(styleid);
+		StyleEntity styleEntity = styleRepository.findByIdUsingJpql(styleid);
+		return styleEntity;
+	}
+
+	}

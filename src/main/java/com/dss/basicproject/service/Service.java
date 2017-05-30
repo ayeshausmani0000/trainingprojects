@@ -15,7 +15,9 @@ public interface Service {
 	public Iterable<StyleEntity> findAllStyles();
 
 	public StyleEntity findByStyleId(Integer id);
-
+	
+	public void deleteStyle(Integer styleId);
+	
 	public void saveItemSize(ItemSizeEntity itemSizeEntity);
 
 	public Iterable<ItemSizeEntity> findAllItemSize();
@@ -26,11 +28,9 @@ public interface Service {
 
 	public Iterable<ItemEntity> findAllItems();
 
-	public boolean isStyleExist(StyleEntity styleEntity,
-			SeasonEntity seasonEntity, ClientEntity clientEntity);
-
 	public ItemEntity findByItemId(Integer id);
 
-	public void deleteStyle(Integer styleId);
+	StyleEntity findByStyleIdWithItems(Integer styleid);
 
+	public boolean isStyleExist(StyleEntity styleEntity, SeasonEntity seasonEntity, ClientEntity clientEntity);
 }
