@@ -303,12 +303,12 @@ public class NewBasicProjectApplicationTests {
 		{
 			Service entityManagerService=(Service) ctx.getBean("entityManagerServiceImpl");
 
-			StyleEntity styleEntity=entityManagerService.findByStyleId(50);
+			/*StyleEntity styleEntity=entityManagerService.findByStyleId(50);
 			System.out.println(styleEntity.getDesc()+" "+styleEntity.getItems());
-			/*Iterable<StyleEntity> styleIterable=entityManagerService.findAllStyles();
+*/			Iterable<StyleEntity> styleIterable=entityManagerService.findAllStyles();
 			for (StyleEntity styleEntity : styleIterable) {
-				System.out.println(styleEntity.getId());
-			}*/
+				System.out.println(styleEntity);
+			}
 		}
 		
 	//Retrieved data using Named query	
